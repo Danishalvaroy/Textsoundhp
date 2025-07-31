@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunyikan HP Saya</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #333;
+        }
+        #textInput {
+            width: 100%;
+            padding: 10px;
+            margin: 1em 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Agar padding tidak melebarkan elemen */
+        }
+        #kirimButton {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        #kirimButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bunyikan HP saya dengan suara text</h1>
+        
+        <input type="text" id="textInput" placeholder="Masukkan teks di sini...">
+        
+        <button id="kirimButton">Kirim</button>
+    </div>
+
+    <script>
+        document.getElementById("kirimButton").addEventListener("click", function() {
+            const inputText = document.getElementById("textInput").value;
+            const url = `https://trigger.macrodroid.com/78650f62-8565-4e40-ac22-382868b22123/indak?hh=${encodeURIComponent(inputText)}`;
+            
+            // Mengirim request GET
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        alert('Perintah berhasil dikirim!');
+                    } else {
+                        alert('Gagal mengirim perintah. Silakan coba lagi.');
+                    }
+                })
+                .catch(error => {
+                    alert('Terjadi kesalahan: ' + error.message);
+                });
+        });
+    </script>
+
+</body>
+</html>
